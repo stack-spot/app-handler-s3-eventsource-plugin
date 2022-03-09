@@ -1,0 +1,38 @@
+name: app-handler-s3-eventsource-plugin
+description: Plugin que adiciona uma fonte de eventos a stack de handlers.
+types:
+  - app
+inputs:
+  - label: Nome de referência do Bucket S3.
+    type: text
+    name: bucket_name
+    default: bucket_name
+    required: true
+  - label: ARN (Amazon Resource Naming) de um bucket já existente, se informado a o plugin usa o bucket já existente como fonte de eventos.
+    type: text
+    name: bucket_arn
+    default: ''
+    required: false
+  - label: Você pretente fazer uma extração e/ou transformação dos objetos recebidos pelo bucket? (Esta opção cria uma fila SQS e uma lambda de tratamento padrão para os objetos recebidos, garantindo também resiliencia ao lidar com o tratamento desses dados)
+    type: bool
+    name: extract_data_by_queue
+    default: false
+    required: false
+
+
+displayName: S3 EventSource Plugin
+
+category: Backend
+
+compatibility:
+  - NodeJS 14.x
+
+about: about.md
+
+usage: usage.md
+
+useCase: useCase.md
+
+implementation: implementation.md
+
+technologies: [ "Typescript", "AWS S3" ]
