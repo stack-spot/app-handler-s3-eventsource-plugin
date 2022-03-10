@@ -18,7 +18,27 @@ inputs:
     name: extract_data_by_queue
     default: false
     required: false
+  - label: Nome da lambda de extração/transformação
+    type: text
+    name: extract_lambda_name
+    default: 'extract-lambda'
+    condition:
+      variable: extract_data_by_queue
+      operator: ==
+    value: true
 
+hooks:
+  - type: edit
+    trigger: after-render
+    path: infra/lib/{{handler_name}}-handler-stack.ts
+    changes:
+      - search:
+          string: "const handlerCore = new stkHandler.StackSpotLambdaHandlerCore(this,"
+          insert-after:
+            snippet: snippets/typescript-add-throtled-lambda-eventsource.txt
+  - type: run
+    trigger: after-render
+    script: scripts/plugin-update-sources.py
 
 displayName: S3 EventSource Plugin
 

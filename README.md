@@ -40,20 +40,20 @@ Recomendamos a utilização de algumas ferramentas para desenvolvimento
 
 ### Configuração Catalogo CLI
 Executar comando abaixo para atualização de local com catálogo que contém OpenAPI plugin:  
-```
-os add catalog https://github.com/stack-spot/skynet-lambda-handler-stack
+```bash
+stk add catalog https://github.com/stack-spot/skynet-lambda-handler-stack
 ```
 
 #### Verificacao template e plugin
 Executando os comandos abaixo é possível verificar que o catálogo foi carregado localmente  
 **Listagem plugin disponíveis localmente:**
-```
-os list plugin
+```bash
+stk list plugin
 ```
 
 **Exemplo output:**
-```
-Catalog: skynet-lambda-handler-stack
+```bash
+Stack: skynet-lambda-handler-stack
 +-----------------------------------+-------------------------------------------------------------------------------------------+---------+-----------------+
 | name                              | description                                                                               | types   | version(latest) |
 +-----------------------------------+-------------------------------------------------------------------------------------------+---------+-----------------+
@@ -61,13 +61,13 @@ TODO
 ```
 
 **Listagem template disponíveis localmente:**
-```
+```bash
 os list template
 ```
 
 **Exemplo output:**
-```
-Catalog: skynet-lambda-handler-stack
+```bash
+Stack: skynet-lambda-handler-stack
 +----------------------+---------------------------------------------+------------------+-----------------+
 | name                 | description                                 | types            | version(latest) |
 +----------------------+---------------------------------------------+------------------+-----------------+
@@ -78,18 +78,18 @@ TODO
 Os passos dessa seção mostram como criar e configurar o plugin na aplicação  
 
 **Passo 1.** Copie e cole a URL abaixo no seu terminal:
-```
-os create app meu-teste-app -t skynet-typescript-catalog/base-app-ts-template
+```bash
+stk create app meu-teste-app -t skynet-lambda-handler-stack/base-app-ts-template
 ```
 
 **Passo 2.** Acessar projeto criado:  
-```
+```bash
 cd meu-teste-app
 ```
 
 **Passo 3.** Aplicação de plugin baseado em catálogo:  
-```
-os apply plugin skynet-typescript-catalog/app-typescript-openapi-plugin
+```bash
+stk apply plugin skynet-lambda-handler-stack/app-handler-s3-eventsource-plugin
 ```
 
 ### Inputs
