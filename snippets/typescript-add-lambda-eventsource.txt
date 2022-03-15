@@ -1,0 +1,12 @@
+
+    const s3{{bucket_name|title|replace("-", "")|replace("_", "")}}EventSource = new stkHandler.S3{{extract_event_source_type}}EventSource(this, '{{bucket_name}}-EventSource', {
+      bucketName: '{{bucket_name}}',
+    {% if extract_lambda_name %}
+      lambdaName: '{{extract_lambda_name}}',
+    {% endif %}
+    {% if src_dir %}
+      sourceDir: '{{src_dir}}',
+    {% endif %}
+    });
+    handlerCore.addEventSource(s3{{bucket_name|title|replace("-", "")|replace("_", "")}}EventSource);
+  

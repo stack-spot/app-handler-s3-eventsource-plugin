@@ -1,7 +1,0 @@
-
-    const s3{{bucket_name|title|replace("-", "")|replace("_", "")}}EventSource = new stkHandler.S3ThrotledEventSource(this, '{{bucket_name}}-EventSource', {
-      bucketName: '{{bucket_name}}',
-      lambdaName: '{{extract_lambda_name}}',
-    });
-    handlerCore.addEventSource(s3{{bucket_name|title|replace("-", "")|replace("_", "")}}EventSource);
-  

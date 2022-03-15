@@ -8,24 +8,27 @@ inputs:
     name: bucket_name
     default: bucket_name
     required: true
-  - label: ARN (Amazon Resource Naming) de um bucket já existente, se informado a o plugin usa o bucket já existente como fonte de eventos.
+  - label: ARN (Amazon Resource Naming) de um bucket já existente? (se informado a o plugin usa o bucket já existente como fonte de eventos)
     type: text
     name: bucket_arn
     default: ''
     required: false
-  - label: Você pretente fazer uma extração e/ou transformação dos objetos recebidos pelo bucket? (Esta opção cria uma fila SQS e uma lambda de tratamento padrão para os objetos recebidos, garantindo também resiliencia ao lidar com o tratamento desses dados)
-    type: bool
-    name: extract_data_by_queue
-    default: false
+  - label: Você pretente fazer uma extração e/ou transformação dos objetos recebidos pelo bucket (Throtled) ou simplesmente receber os eventos de criação de objetos do bucket (Simple)? (Esta opção cria uma fila SQS e uma lambda de tratamento padrão para os objetos recebidos, garantindo também resiliencia ao lidar com o tratamento desses dados)
+    type: text
+    name: extract_event_source_type
+    items:
+      - 'Simple'
+      - 'Throtled'
+    default: 'Simple'
     required: false
   - label: Nome da lambda de extração/transformação
     type: text
     name: extract_lambda_name
     default: 'extract-lambda'
     condition:
-      variable: extract_data_by_queue
+      variable: extract_event_source_type
       operator: ==
-    value: true
+      value: 'Throtled'
 
 hooks:
   - type: edit
@@ -35,7 +38,7 @@ hooks:
       - search:
           string: "const handlerCore = new stkHandler.StackSpotLambdaHandlerCore(this,"
           insert-after:
-            snippet: snippets/typescript-add-throtled-lambda-eventsource.txt
+            snippet: snippets/typescript-add-lambda-eventsource.txt
   - type: run
     trigger: after-render
     script: scripts/plugin-update-sources.py
