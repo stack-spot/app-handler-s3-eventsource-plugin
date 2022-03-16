@@ -42,9 +42,8 @@ hooks:
   - type: run
     trigger: after-render
     commands:
-      - npm run infra:install:handlercore
-      - npm run infra:format:fix
       - npm run infra:build:cdk
+      - npm run infra:format:fix
       - npm run source:setup
 
 displayName: S3 EventSource Plugin
