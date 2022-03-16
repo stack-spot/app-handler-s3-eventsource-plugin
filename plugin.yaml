@@ -41,7 +41,11 @@ hooks:
             snippet: snippets/typescript-add-lambda-eventsource.txt
   - type: run
     trigger: after-render
-    script: scripts/plugin-update-sources.py
+    commands:
+      - npm run infra:install:handlercore
+      - npm run infra:format:fix
+      - npm run infra:build:cdk
+      - npm run source:setup
 
 displayName: S3 EventSource Plugin
 
