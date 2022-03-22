@@ -41,10 +41,18 @@ hooks:
             snippet: snippets/typescript-add-lambda-eventsource.txt
   - type: run
     trigger: after-render
-    commands:
+    mac:
       - npm run infra:build:cdk
       - npm run infra:format:fix
       - npm run source:setup
+    linux:
+      - npm run infra:build:cdk
+      - npm run infra:format:fix
+      - npm run source:setup
+    windows:
+      - cmd /c npm run infra:build:cdk
+      - cmd /c npm run infra:format:fix
+      - cmd /c npm run source:setup
 
 displayName: S3 EventSource Plugin
 
