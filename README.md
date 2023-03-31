@@ -98,3 +98,4 @@ Abaixo estão listados os inputs do plugin.
 Os inputs necessários para utilizar o plugin são:  
 
 
+
